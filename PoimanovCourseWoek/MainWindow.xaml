@@ -1,0 +1,136 @@
+﻿
+<Window x:Class="PoimanovCourseWoek.MainWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
+             mc:Ignorable="d"
+              Title="MainWindow" Height="638.2" Width="1153.8">
+        
+    <Window.Resources>
+        <cm:BackgroundWorker x:Key="backgroundWorker" 
+      WorkerReportsProgress="True" WorkerSupportsCancellation="True"
+      DoWork="backgroundWorker_DoWork" ProgressChanged="backgroundWorker_ProgressChanged" 
+      RunWorkerCompleted="backgroundWorker_RunWorkerCompleted"/>
+
+        <BooleanToVisibilityConverter x:Key="bvc"></BooleanToVisibilityConverter>
+    </Window.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="333*"/>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="138*"/>
+        </Grid.RowDefinitions>
+        <TabControl Margin="0,6.6,0.2,-2.2" Grid.Row="1" Grid.RowSpan="3">
+            <TabItem Header="Генератор">
+                <Grid Height="auto"  Width="auto" Margin="10,10,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                        <RowDefinition Height="75.2"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <lvc:CartesianChart    Name="ch2" Series="{Binding Generated}" Zoom="X" LegendLocation="Bottom" Margin="29,3,5.2,3" Grid.Row="1" >
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="" LabelFormatter="{Binding YFormatter}" MaxValue="{Binding max}" MinValue="0"></lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                   
+                        <lvc:CartesianChart.ChartLegend>
+                            <lvc:DefaultLegend BulletSize="30" Background="White"/>
+                        </lvc:CartesianChart.ChartLegend>
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="" Labels="{Binding AxisX}" Separator="{x:Static lvc:DefaultAxes.CleanSeparator}" LabelFormatter="{Binding YFormatter}">
+
+                            </lvc:Axis>
+
+                        </lvc:CartesianChart.AxisX>
+                        
+                    </lvc:CartesianChart>
+                    <Grid HorizontalAlignment="Left" Height="378" VerticalAlignment="Top" Width="860" Margin="10,1,-10.8,0" Grid.RowSpan="2"/>
+                    <ProgressBar Height="17" Name="ResProgres" Margin="10,2.2,10.4,0" Grid.Row="3" VerticalAlignment="Top"/>
+                    <Grid IsEnabled="False" Margin="14,0,36.6,20.2" Name="Main" Grid.Row="2" Height="54" VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="112*"/>
+                            <ColumnDefinition Width="102*"/>
+                            <ColumnDefinition Width="81*"/>
+                            <ColumnDefinition Width="121*"/>
+                            <ColumnDefinition Width="187*"/>
+                            
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Content="Метрополиса" Name="cbMetr" VerticalAlignment="Center" Height="15" Grid.Column="1" Margin="4,20,1.4,21.8" Checked="cbRevs_Checked" Unchecked="cbMetr_Unchecked"/>
+                        <CheckBox Content="Неймана"  Name="cbNeim" VerticalAlignment="Center" Grid.Column="2" Height="15" Margin="2.6,20,1.2,21.8" Checked="cbNeimf" Unchecked="cbNeim_Unchecked"/>
+                        <CheckBox  Name="cbRevs" VerticalAlignment="Center" Grid.Column="3" Height="15" Margin="3.8,20,1,21.8" Checked="cbINv" Unchecked="cbRevs_Unchecked">
+                            Обратных фукнкций   
+                        </CheckBox>
+                        <TextBlock Text="Показать на графике"  VerticalAlignment="Center" Height="18" Margin="22,22,142.2,23" Grid.ColumnSpan="2"/>
+                        <Button Grid.Column="4" Margin="20.2,23,19.6,8" Click="GetMath">Математика</Button>    
+                        <Grid IsEnabled="True" Visibility="Hidden" Grid.Column="4" Margin="8.2,8,13.6,6" VerticalAlignment="Center" Height="49">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="11*"/>
+                                <RowDefinition Height="9*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="113*"/>
+                                <ColumnDefinition Width="68*"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider VerticalAlignment="Top" TickFrequency="5" Minimum="100"  Name="Colums" IsSnapToTickEnabled="True"  Value="{Binding NumChartPoints}" Maximum="150" Margin="1,0,-0.2,0" Height="18" Grid.ColumnSpan="2"/>
+                            <Label Content="К-во cтолбцов" HorizontalAlignment="Left" Grid.RowSpan="2" Width="116" Margin="21,24,0,0.6"/>
+                            <TextBlock Grid.Column="1"   Name="K" Text="{Binding Value, ElementName=Colums,StringFormat=F0}" Width="auto" Height="auto" Margin="5.4,1.8,35.2,4.6" Grid.Row="1"/>
+                        </Grid>
+                        <Button Content="MoreInfo" Name="Mb" Visibility="Collapsed"  Grid.Column="1" HorizontalAlignment="Left" Margin="3.2,19,0,0" VerticalAlignment="Top" Width="138" Height="20" Click="GetMath"/>
+                        <Button Content="MoreInfo" Name="Nb" Visibility="Collapsed" Grid.Column="2" HorizontalAlignment="Left" Margin="2.8,19,0,0" VerticalAlignment="Top" Width="108" Height="20" Click="GetMath"/>
+                        <Button Content="MoreInfo" Name="Fb" Visibility="Collapsed"  Grid.Column="3" HorizontalAlignment="Left" Margin="2,19,0,0" VerticalAlignment="Top" Width="122" Height="20" Click="GetMath"/>
+
+                    </Grid>
+                    <Grid Height="28" Margin="0,15.8,12.2,-3.8" Grid.Row="3" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="164*"/>
+                            <ColumnDefinition Width="162*"/>
+                            <ColumnDefinition Width="57*"/>
+                            <ColumnDefinition Width="73*"/>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="164*"/>
+                            <ColumnDefinition Width="193*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Старт" Name="Start" HorizontalAlignment="Left" Margin="11.8,7,0,0" VerticalAlignment="Top" Width="52" Height="19" Grid.Column="3" Click="Start_Click"/>
+                        <Label Content="Статистика" VerticalAlignment="Top" Margin="2.6,3,82.4,0" Height="25" Grid.Column="5"/>
+                        <Slider  VerticalAlignment="Center" TickFrequency="100000" Minimum="100000"  x:Name="Statistic" IsSnapToTickEnabled="True"  Value="100000" Maximum="10000000" Margin="4.6,6,12.2,2" Height="20" Grid.Column="6" ValueChanged="Statistic_ValueChanged"/>
+                        <TextBlock x:Name="Stat" Text="{Binding Value, ElementName=Statistic}" Width="auto" Height="auto" Margin="79.6,9,191.2,3" Grid.Column="5" Grid.ColumnSpan="2"/>
+                        <Button Content="Стоп" Name="Spbtn" IsEnabled="False" HorizontalAlignment="Left" Margin="3.6,7,0,0" VerticalAlignment="Top" Width="52" Height="19" Grid.Column="2" Click="Stop_Click"/>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            
+
+        </TabControl>
+        <Grid Margin="0,0,6.2,2.4" Name="Main1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="260*"/>
+                <ColumnDefinition Width="45*"/>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="260*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="txtA"  TextAlignment="Left" VerticalAlignment="Center" 
+        		Text="{Binding Value, ElementName=a, StringFormat=F3}" Grid.Column="1"/>
+            <Slider Grid.Column="2"   TickFrequency="5"  TickPlacement="BottomRight" x:Name="a" Value="1.5"  VerticalAlignment="Center" Minimum="0.00001"  HorizontalAlignment="Left" Width="300" Height="19" ValueChanged="a_ValueChanged"  />
+            <Slider Grid.Column="6" x:Name="b" TickPlacement="BottomRight" Value="1"  Minimum="0.00001" VerticalAlignment="Center"  Width="300" Height="19" ValueChanged="b_ValueChanged"/>
+            <Button Style="{StaticResource Research}" Content="" Grid.Column="3" Margin="0,10,10.2,0" VerticalAlignment="Center" Click="Button_Click_3" Height="22" HorizontalAlignment="Right" Width="23" RenderTransformOrigin="0.487,0.497" SnapsToDevicePixels="True" ClipToBounds="True" Foreground="{x:Null}" BorderBrush="Black">
+                <Button.Background>
+                    <ImageBrush ImageSource="Synchronize_48px.png"/>
+                </Button.Background>
+            </Button>
+            <Label Padding="0" Content="A=" HorizontalAlignment="Right"  Margin="0,0,0,0" VerticalAlignment="Center" Height="16" Width="17"/>
+            <TextBlock x:Name="txtA_Copy" TextAlignment="Left" VerticalAlignment="Center" 
+        		Text="{Binding Value, ElementName=b, StringFormat=F3}" Grid.Column="5" />
+            <Label Padding="0" Content="B=" HorizontalAlignment="Right"   VerticalAlignment="Center" Height="16" Width="17" Grid.Column="4"/>
+        </Grid>
+
+    </Grid>
+</Window>

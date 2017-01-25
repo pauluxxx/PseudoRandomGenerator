@@ -1,0 +1,36 @@
+﻿<Window x:Class="PoimanovCourseWoek.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"        
+        Title="Window1" Height="355.4" Width="363.2">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=" 1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Метрополис" Margin="8,6,15.8,0" VerticalAlignment="Top" Height="26"/>
+        <Label Content="Неймана" Margin="16,4,39.8,0" VerticalAlignment="Top" Grid.Row="3" Height="26"/>
+        <Label Content="Обратных функций" Margin="6,4.2,3.8,0" VerticalAlignment="Top" Grid.Row="6" Height="26"/>
+        <Label Name="_1" Content="" Grid.Column="1" Margin="15.2,4,26.8,0" VerticalAlignment="Top" Height="26"/>
+        <Label Name="_2" Content="" Grid.Column="1" Margin="17.2,6,24.8,0" VerticalAlignment="Top" Height="26" Grid.Row="1"/>
+        <Label Name="_3"  Content="" Grid.Column="1" Margin="20.2,6,21.8,0" VerticalAlignment="Top" Grid.Row="2" Height="25"/>
+        <Label Name="_4" Content="" Grid.Column="1" Margin="21.2,9,20.8,0" VerticalAlignment="Top" Grid.Row="3" Height="25"/>
+        <Label Name="_5" Content="" Grid.Column="1" Margin="22.2,9,19.8,0" VerticalAlignment="Top" Grid.Row="4" Height="26"/>
+        <Label Name="_6" Content="" Grid.Column="1" Margin="22.2,7,19.8,0" VerticalAlignment="Top" Grid.Row="5" Height="26"/>
+        <Label Name="_7" Content="" Grid.Column="1" Margin="24.2,4.2,17.8,0" VerticalAlignment="Top" Grid.Row="6" Height="26"/>
+        <Label Name="_8" Content="" Grid.Column="1" Margin="24.2,6.2,17.8,0" VerticalAlignment="Top" Grid.Row="7" Height="26"/>
+        <Label Name="_9" Content="" Grid.Column="1" Margin="24.2,7.4,17.8,0" VerticalAlignment="Top" Grid.Row="8" Height="26"/>
+
+    </Grid>
+</Window>
